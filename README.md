@@ -2,6 +2,15 @@
 
 A comprehensive project health monitoring system for IT/Software companies.
 
+> [!TIP]
+> **Demo Guide**: A detailed 4-5 minute script and page-by-page explanation for your project demo can be found in [DEMO_GUIDE.md](file:///c:/intern/project-pulse/DEMO_GUIDE.md).
+
+## Project Overview (Bengali)
+**Project Pulse** হলো একটি আধুনিক প্রজেক্ট হেলথ মনিটরিং সিস্টেম। এটি মূলত IT কোম্পানিগুলোর জন্য তৈরি করা হয়েছে যাতে তারা তাদের প্রজেক্টের বর্তমান অবস্থা, ঝুঁকি (Risks) এবং ক্লায়েন্ট সন্তুষ্টি রিয়েল-টাইমে ট্র্যাক করতে পারে। 
+- **Admin**: সকল প্রজেক্টের হেলথ স্কোর মনিটর করতে পারেন এবং নতুন প্রজেক্ট তৈরি করতে পারেন।
+- **Employee**: সাপ্তাহিক কাজের আপডেট (Check-in) এবং কনফিডেন্স লেভেল প্রদান করেন।
+- **Client**: প্রজেক্ট সম্পর্কে ফিডব্যাক এবং যদি কোনো ইমার্জেন্সি ইস্যু থাকে তবে তা ফ্ল্যাগ (Flag) করতে পারেন।
+
 ## Tech Stack
 - **Frontend**: Next.js (App Router), Tailwind CSS
 - **Backend**: Next.js API Routes (Serverless Functions)
