@@ -1,72 +1,102 @@
 # Project Pulse
 
-A comprehensive project health monitoring system for IT/Software companies.
+Project Pulse is a comprehensive project health monitoring system designed for IT and software development companies. It enables real-time tracking of project status, risks, and client satisfaction through a data-driven "Health Score."
 
-> [!TIP]
-> **Demo Guide**: A detailed 4-5 minute script and page-by-page explanation for your project demo can be found in [DEMO_GUIDE.md](file:///c:/intern/project-pulse/DEMO_GUIDE.md).
+## Table of Contents
+- [Overview](#overview)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Health Score Logic](#health-score-logic)
+- [Getting Started](#getting-started)
+- [API Summary](#api-summary)
+- [Demo Guide](#demo-guide)
 
-## Project Overview (Bengali)
-**Project Pulse** হলো একটি আধুনিক প্রজেক্ট হেলথ মনিটরিং সিস্টেম। এটি মূলত IT কোম্পানিগুলোর জন্য তৈরি করা হয়েছে যাতে তারা তাদের প্রজেক্টের বর্তমান অবস্থা, ঝুঁকি (Risks) এবং ক্লায়েন্ট সন্তুষ্টি রিয়েল-টাইমে ট্র্যাক করতে পারে। 
-- **Admin**: সকল প্রজেক্টের হেলথ স্কোর মনিটর করতে পারেন এবং নতুন প্রজেক্ট তৈরি করতে পারেন।
-- **Employee**: সাপ্তাহিক কাজের আপডেট (Check-in) এবং কনফিডেন্স লেভেল প্রদান করেন।
-- **Client**: প্রজেক্ট সম্পর্কে ফিডব্যাক এবং যদি কোনো ইমার্জেন্সি ইস্যু থাকে তবে তা ফ্ল্যাগ (Flag) করতে পারেন।
+---
+
+## Overview
+The platform facilitates communication between three primary stakeholders:
+- **Admins**: Oversee all projects, monitor health scores, and manage project creation.
+- **Employees**: Provide weekly progress updates (check-ins) and self-reported confidence levels.
+- **Clients**: Rate satisfaction and flag critical issues or risks directly.
+
+## Key Features
+- **Role-Based Access Control**: Secure logins for Admins, Employees, and Clients.
+- **Automated Health Scoring**: Dynamic calculation of project viability.
+- **Interactive Dashboards**: Tailored views for each user role.
+- **Early Warning System**: Color-coded indicators (Green/Yellow/Red) to highlight at-risk projects.
+- **Feedback Loop**: Integrated client feedback and employee reporting.
 
 ## Tech Stack
-- **Frontend**: Next.js (App Router), Tailwind CSS
-- **Backend**: Next.js API Routes (Serverless Functions)
-- **Database**: MongoDB (Access via URI)
-- **Auth**: JWT (HttpOnly Cookie)
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **Authentication**: JWT (JSON Web Tokens) with HttpOnly cookies.
+- **Backend**: Next.js API Routes.
 
-## Features
-- **Role-Based Access**: Admin, Employee, Client.
-- **Health Score Logic**: Automatically calculated (0-100) based on:
-    - Client Satisfaction (40%)
-    - Employee Confidence (30%)
-    - Timeline Status (20%)
-    - Risks & Issues (10% + penalties)
-- **Dashboards**: Dedicated views for each role.
-- **Weekly Check-ins**: Employees report progress.
-- **Feedback Loop**: Clients rate satisfaction.
+---
 
-## Health Score Logic Explained
-1.  **Base Score starts at 100.**
-2.  **Client Satisfaction**: Deducts points if average rating < 5.
-3.  **Employee Confidence**: Deducts points if average confidence < 5.
-4.  **Critical Issues**: -20 points immediately if a client flags an issue.
-5.  **Risks**: Deducts points for open risks based on severity (High: -10, Medium: -5).
-6.  **Timeline**: -15 points if the project is overdue.
+## Health Score Logic
+The project "Pulse" (0-100) is calculated based on several weighted factors:
+
+1.  **Client Satisfaction (40%)**: Derived from client ratings.
+2.  **Employee Confidence (30%)**: Based on team sentiment and reporting.
+3.  **Critical Issues**: Immediate **-20 point** penalty if a client flags a major issue.
+4.  **Risks**: Deductions for open risks (High Severity: -10, Medium: -5).
+5.  **Timeline**: **-15 point** penalty if the project surpasses its deadline.
+
+*Color Coding:*
+- 🟢 **Healthy (80-100)**: Project is on track.
+- 🟡 **Warning (60-79)**: Minor issues or risks identified.
+- 🔴 **Critical (< 60)**: Urgent attention required.
+
+---
 
 ## Getting Started
 
-1.  **Install Dependencies**:
-    ```bash
-    npm install
-    ```
+### 1. Prerequisites
+- Node.js (v18+)
+- MongoDB instance (local or Atlas)
 
-2.  **Environment Setup**:
-    Create `.env` with:
-    ```env
-    MONGO_URI=your_mongodb_connection_string
-    JWT_SECRET=supersecretkey
-    ```
+### 2. Installation
+```bash
+npm install
+```
 
-3.  **Seed Database**:
-    Run the seed script to create initial users and a project:
-    ```bash
-    node scripts/seed.js
-    ```
-    *Default Users:*
-    - Admin: `admin@example.com` / `password`
-    - Employee: `employee1@example.com` / `password`
-    - Client: `client@example.com` / `password`
+### 3. Environment Setup
+Create a `.env` file in the root directory:
+```env
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+```
 
-4.  **Run Dev Server**:
-    ```bash
-    npm run dev
-    ```
+### 4. Database Seeding
+Initialize the database with demo users and projects:
+```bash
+node scripts/seed.js
+```
+*Default Credentials:*
+- **Admin**: `admin@example.com` / `password`
+- **Employee**: `employee1@example.com` / `password`
+- **Client**: `client@example.com` / `password`
 
-## API Extensions
-- `POST /api/auth/login`
-- `GET /api/projects` (Role-filtered)
-- `POST /api/projects/[id]/checkin`
-- `POST /api/projects/[id]/feedback`
+### 5. Running the Application
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view the app.
+
+---
+
+## API Summary
+- `POST /api/auth/login`: User authentication.
+- `GET /api/projects`: Retrieve projects (filtered by role).
+- `POST /api/projects/[id]/checkin`: Submit employee updates.
+- `POST /api/projects/[id]/feedback`: Submit client feedback.
+
+---
+
+## Demo Guide
+To demonstrate the full capability of Project Pulse:
+1. **Admin View**: Show the dashboard with the health score grid and create a new project.
+2. **Employee Flow**: Log in as an employee, select a project, and submit a "Weekly Check-in" with a low confidence level to see the health score drop.
+3. **Client Flow**: Log in as a client and "Flag an Issue" to witness an immediate status change to "Critical".
